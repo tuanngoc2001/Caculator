@@ -30,7 +30,7 @@ class _ScreenState extends State<Screen> {
               style: const TextStyle(fontSize: 40, color: Colors.white),
             ),
           ),
-          nutbam(size, "AC", "?", "%", "/", true),
+          nutbam(size, "AC", "+/-", "%", "/", true),
           nutbam(size, "7", "8", "9", "X", false),
           nutbam(size, "4", "5", "6", "-", false),
           nutbam(size, "1", "2", "3", "+", false),
@@ -104,20 +104,28 @@ class _ScreenState extends State<Screen> {
                 switch (pheptinh) {
                   case "+":
                     kq = numberone + numbertwo;
+                    numberone = kq;
+                    numbertwo = 0;
                     break;
                   case "-":
                     kq = numberone - numbertwo;
+                    numberone = kq;
+                    numbertwo = 0.0;
                     break;
                   case "X":
                     kq = numberone * numbertwo;
+                    numberone = kq;
+                    numbertwo = 0.0;
                     break;
                   case "/":
                     kq = numberone / numbertwo;
+                    numberone = kq;
+                    numbertwo = 0.0;
                     break;
                   case "%":
                     if (numbertwo != 0) {
                       kq = numberone % numbertwo;
-                      numberone = 0.0;
+                      numberone = kq;
                       numbertwo = 0.0;
                       pheptinh = "";
                     } else {
@@ -148,7 +156,15 @@ class _ScreenState extends State<Screen> {
         pheptinh = "";
         kq = 0.0;
         break;
-      case "?": //cái này mình chưa rõ là gì nên bỏ qua nhé.
+      case "+/-":
+        if (numberone == kq) {
+          kq = kq * -1;
+          numberone = kq;
+        } else {
+          kq = kq * -1;
+          numbertwo = kq;
+        }
+
         break;
     }
   }
